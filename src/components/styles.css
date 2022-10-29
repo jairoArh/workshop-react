@@ -1,0 +1,7 @@
+.taskCard{
+    width: 400px;
+    background: hsl(280, 37%, 92%);
+    border: 1px solid #63f496;
+    padding: 10px;
+    margin: 10px;
+}

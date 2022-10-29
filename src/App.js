@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import {useEffect, useState} from 'react'
+import { BrowserRouter } from 'react-router-dom';
+import {Navbar} from './components/Navbar'
+import { Navigation } from './components/Navigation';
+import data from './data/tasks'
+
 
 function App() {
+  const [ rol, setRol ] = useState('admin')
+  const [ tasks, setTasks ] = useState([])
+
+  useEffect(()=>{
+    setTasks(data)
+  },[])
+
+  function createTask(task){
+    setTasks([...tasks,task])
+  }
+
+  function eraseTask(id){
+    setTasks( tasks.filter(t => t.id !== id ))
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Navbar rol={rol} />
+      <Navigation rol={rol} createTask={createTask} eraseTask={eraseTask} tasks={tasks}/>
+    </BrowserRouter>
   );
 }
 
